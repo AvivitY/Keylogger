@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         pass_txt = findViewById(R.id.pass_txt);
         number_txt = findViewById(R.id.number_txt);
-        clear_btn = (MaterialButton) findViewById(R.id.clear_btn);
+        clear_btn = findViewById(R.id.clear_btn);
         clear_btn.setOnClickListener(view -> clearText());
         pass = MSP.getMe().getString("PASS","");
         numbers = MSP.getMe().getString("NUMBERS","");
@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void findPass(){
         Pattern pattern = Pattern.compile("\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+"); //email regex
-        Log.d("ccc", input);
         Log.d("ccc", "pass "+pass);
         Matcher matcher = pattern.matcher(input);
         while (matcher.find())
@@ -66,17 +65,18 @@ public class MainActivity extends AppCompatActivity {
             String s = matcher.group();
             int start = input.indexOf(s)+s.length();
             Log.d("ccc", "Email " + s);
-            //Log.d("ccc", "index " + start);
-            Log.d("ccc", "Pass "+input.substring(start,input.indexOf("DONE",start)));
-            //pass_txt.append(matcher.group()+"\n");
-            pass_txt.append(input.substring(start,input.indexOf("DONE",start))+"\n");
-            MSP.getMe().putString("PASS",pass+input.substring(start,input.indexOf("DONE",start))+"\n");
-            pass = MSP.getMe().getString("PASS","");
+            int done= input.indexOf("DONE",start);
+            Log.d("ccc", "done " + done);
+            if (done != -1){ // DONE not found
+                Log.d("ccc", "Pass "+input.substring(start,done));
+                pass_txt.append(input.substring(start,done)+"\n");
+                MSP.getMe().putString("PASS",pass+input.substring(start,done)+"\n");
+                pass = MSP.getMe().getString("PASS","");
+            }
         }
     }
 
     private void findPhoneNumbers(){
-        Log.d("ccc", input);
         Log.d("ccc", "numbers " + numbers);
         Pattern pattern = Pattern.compile("05\\d{8}"); //phone number regex
         Matcher matcher = pattern.matcher(input);
@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         input = MSP.getMe().getString("KEYS","");
+        Log.d("ccc", input);
         findPhoneNumbers();
         findPass();
         MSP.getMe().putString("KEYS",""); //clear
