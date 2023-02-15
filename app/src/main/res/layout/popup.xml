@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="10dp"
+    app:cardCornerRadius="20dp"
+    app:cardUseCompatPadding="true"
+    android:backgroundTint="#C8CFFA">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:elevation="10dp">
+        <TextView
+            android:id="@+id/popup_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="16dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Are you sure you want to delete your history?"
+            android:textColor="@color/black"
+            android:textSize="22dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/popup_yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:cornerRadius="20dp"
+            android:elevation="10dp"
+            android:text="Delete"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:backgroundTint="#3F51B5" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/popup_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:cornerRadius="20dp"
+            android:elevation="10dp"
+            android:text="Cancel"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:backgroundTint="#3F51B5" />
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
