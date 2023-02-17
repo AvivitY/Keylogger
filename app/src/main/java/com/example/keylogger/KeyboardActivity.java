@@ -46,7 +46,9 @@ public class KeyboardActivity extends InputMethodService implements KeyboardView
                 ic.deleteSurroundingText(1, 0);
                 Log.d("ccc", "onKey - you pressed DELETE");
                 String temp = MSP.getMe().getString("KEYS","");
-                MSP.getMe().putString("KEYS",temp.substring(0,temp.length()-1));
+                if(temp.length() > 0) {
+                    MSP.getMe().putString("KEYS", temp.substring(0, temp.length() - 1));
+                }
                 break;
             case Keyboard.KEYCODE_SHIFT:
                 isCaps = !isCaps;
